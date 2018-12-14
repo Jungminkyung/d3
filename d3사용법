@@ -1,0 +1,31 @@
+
+튜토리얼 주소(영어) https://github.com/d3/d3/wiki/Tutorials
+
+스크립트 링크
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js" type="text/JavaScript"></script>
+
+
+         클래스선택           없어도됨    데이터넣고enter
+d3.select(".chart").selectAll("div").data(data).enter().append("div").style("width",function(d){    
+      return x(d)+"px";
+  }).text( function(d){    
+      return d;
+  }
+);
+
+앞의 selectAll("div")는 div가 없을경우 생긴다. selectAll("gg") 이라고 쳐도 같은 결과가 나온다.
+data(data).enter()는 관용구처럼 쓰면 된다.
+style의 width에 function을 넣어서 데이터에 해당하는 수치로 가로길이를 조절할 수 있다.  return d*10+"px"  처럼.
+text도 조절가능.
+
+x(d)+"px"; 부분은 가로길이를 데이터*10px 로 고정시키지 않기 위해서 앞의 10px부분을 함수로 바꿔준 것인데,
+
+var data = [4, 8, 15, 16, 23, 45];  
+var x = d3.scale.linear().domain([0, d3.max(data)]).range([0,420]);
+도메인이 데이터의 처음과 끝(0부터45), 레인지는 리턴값은데 0부터420.  x는 함수로 작동된다.
+x(d)라고 하면 들어오는값을 0부터 45사이로 받아와 0부터 420까지값으로 리턴해준다.
+
+
+
+
